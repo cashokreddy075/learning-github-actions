@@ -31,11 +31,13 @@ jobs:
   job3:
     name: job3
     needs: job1
-    runs-on: ubuntu-22.04
+    runs-on: windows-latest
     steps:
       - name: Job with single dependency
         run: sleep 10
-
+      - name: chechking runner info
+        shell: pwsh
+        run: get-computerinfo
   job4:
     name: job4
     needs: [job1,job2,job3]
