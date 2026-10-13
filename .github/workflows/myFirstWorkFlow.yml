@@ -6,7 +6,7 @@ on: push
 jobs:
   job1:
     name: JOB1
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Running in single command in job1
         run: echo "Hi this is my first GitHub workflow"
