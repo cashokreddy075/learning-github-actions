@@ -4,8 +4,9 @@ name: my-first-workflow
 # Trigger the workflow on every push to any branch
 on: 
   schedule:
-    - cron: "*/1 * * * *"
-
+    - cron: "*5 * * * *"
+  workflow_dispatch:
+  push: 
 jobs:
   job1:
     name: JOB1
