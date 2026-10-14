@@ -2,7 +2,9 @@
 name: my-first-workflow
 
 # Trigger the workflow on every push to any branch
-on: push
+on: 
+  schedule:
+    - cron: "*/1 * * * *"
 
 jobs:
   job1:
