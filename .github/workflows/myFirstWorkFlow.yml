@@ -1,7 +1,5 @@
 
 name: my-first-workflow
-
-# Trigger the workflow on every push to any branch
 on: 
   push: 
 jobs:
@@ -12,12 +10,12 @@ jobs:
       - name: step-1
         run: |
           pwd
-          ls-ltr
+          ls -ltr
           hostname
       - name: step2 -Checkout
         uses: actions/checkout@v5.1.0
       - name: step-3
         run: |
           pwd 
-          ls-ltr
+          ls -ltr
           hostname
