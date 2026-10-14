@@ -3,48 +3,21 @@ name: my-first-workflow
 
 # Trigger the workflow on every push to any branch
 on: 
-  schedule:
-    - cron: "5 * * * *"
-  workflow_dispatch:
   push: 
 jobs:
   job1:
     name: JOB1
     runs-on: ubuntu-22.04
-
     steps:
-      - name: Running in single command in job1
-        run: echo "Hi this is my first GitHub workflow"
-
-      - name: Checking OS release for GitHub runner
-        run: cat /etc/os-release
-      - name: calling sleep
-        run: sleep 20
-  job2:
-    name: job2
-    runs-on: ubuntu-22.04
-    steps:
-      - name: check the hostname fot runner
-        run: hostname
-      - name: running multiple commands
+      - name: step-1
         run: |
-          echo "hi from ashok"
-          echo "current time is date"
-          sleep 20
-  job3:
-    name: job3
-    needs: job1
-    runs-on: windows-latest
-    steps:
-      - name: Job with single dependency
-        run: sleep 10
-      - name: chechking runner info
-        shell: pwsh
-        run: get-computerinfo
-  job4:
-    name: job4
-    needs: [job1,job2,job3]
-    runs-on: ubuntu-22.04
-    steps:
-      - name: job for multiple dependences
-        run: sleep 10
+          pwd
+          ls-ltr
+          hostname
+      - name: step2 -Checkout
+        uses: actions/checkout@v5.1.0
+      - name: step-3
+        run: |
+          pwd 
+          ls-ltr
+          hostname
