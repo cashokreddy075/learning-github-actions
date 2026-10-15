@@ -1,1 +1,35 @@
+name: Passing Artifacts Between jobs
+on: push
 
+jobs:
+  build:
+    name: Build job
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Create Build file
+        run: |
+          mkdir -p build
+          echo "This is my application build" > build/app.txt
+
+      - name: Upload build artifact
+        uses: actions/upload-arifact@v4
+        with:
+          name: my-build
+          path: build/app.txt
+  deploy:
+    name: Deploy Job
+    runs-on: ubuntu-22.04
+    needs: build
+
+    steps:
+      - name: Download build artifact
+        uses: actions/upload-arifact@v5
+        with:
+          name: my-build
+          path: downloaded
+      - name: Verify downloaded file
+        run: |
+          ls -R downloaded
+          cat downloaded/app.txt
+      
