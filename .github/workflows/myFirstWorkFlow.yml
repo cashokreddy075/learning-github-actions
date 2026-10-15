@@ -6,33 +6,36 @@ on:
     branches:
       - dev
       - 'feature-*'
+
 jobs:
   job1:
     name: JOB1
     runs-on: ubuntu-22.04
 
     steps:
-      - name: step-1
+      - name: Step 1 - Check Runner
         run: |
           pwd
           ls -ltr
           hostname
 
-      - name: step-2-checkout
+      - name: Step 2 - Checkout Code
         uses: actions/checkout@v4
 
-      - name: step-3-create-files
+      - name: Step 3 - Create Files
         run: |
-          echo 'pwd' > myartifact.txt
+          pwd > myartifact.txt
           mkdir -p artifacts
-          echo 'ls-ltr' > artifacts/list.txt
-          echo 'hostname' > artifacts/hostname.txt
+          ls -ltr > artifacts/list.txt
+          hostname > artifacts/hostname.txt
 
-      - name: Upload Single File
+      - name: Step 4 - Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: single_file
-          path: ./myartifact.txt
+          name: my-build
+          path: |
+            myartifact.txt
+            artifacts/
 
   job2:
     name: JOB2
@@ -40,18 +43,20 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Checking current directory before download
+      - name: Step 1 - Check Before Download
         run: |
           pwd
           ls -ltr
 
-      - name: Download single file artifact
+      - name: Step 2 - Download Artifact
         uses: actions/download-artifact@v4
         with:
-          name: single_file
+          name: my-build
+          path: downloaded
 
-      - name: Checking current directory after download
+      - name: Step 3 - Verify Downloaded Files
         run: |
-          pwd
-          ls -ltr
-          cat myartifact.txt
+          ls -R downloaded
+          cat downloaded/myartifact.txt
+          cat downloaded/artifacts/list.txt
+          cat downloaded/artifacts/hostname.txt
