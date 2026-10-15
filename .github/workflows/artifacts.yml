@@ -13,7 +13,7 @@ jobs:
           echo "This is my application build" > build/app.txt
 
       - name: Upload build artifact
-        uses: actions/upload-arifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: my-build
           path: build/app.txt
